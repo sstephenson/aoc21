@@ -1,0 +1,41 @@
+#!/bin/sh
+set -e
+
+check() {
+  cmp -s - "$1"
+}
+
+list_output_files() {
+  find output -type f -name "?.txt"
+}
+
+solve() {
+  "$(dirname "$0")"/aoc-solve "$1" "$2"
+}
+
+TMPDIR="${TMPDIR:-/tmp}"
+ERR_FILE="${TMPDIR%/}/aoc-test-err.$$"
+trap 'rm -f "$ERR_FILE"' EXIT
+
+index=0
+status=0
+trap 'status=1' USR1
+printf "1..%d\n" "$(list_output_files | wc -l)"
+
+list_output_files \
+  | sort \
+  | while read -r file; do
+      day="$(basename "$(dirname "$file")")"
+      problem="$(basename "$file" .txt)"
+      index=$((index + 1))
+
+      if solve "$day" "$problem" 2>"$ERR_FILE" | check "$file"; then
+        printf "ok %d - %s\n" $index "$file"
+      else
+        sed -e "s/^/# /" "$ERR_FILE"
+        printf "not ok %d - %s\n" $index "$file"
+        kill -USR1 $$
+      fi
+    done
+
+exit $status

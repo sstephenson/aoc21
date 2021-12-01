@@ -1,0 +1,25 @@
+#!/bin/sh
+set -e
+
+usage() {
+  echo "usage: $(basename "$0") <day> <problem>" >&2
+  exit 1
+}
+
+DAY="${1#0}"
+[ -n "$DAY" ] || usage
+
+PROBLEM="$2"
+[ -n "$PROBLEM" ] || usage
+
+PROGRAM="$(printf "src/%02d/%d/solve" "$DAY" "$PROBLEM")"
+
+if ! [ -x "$PROGRAM" ]; then
+  echo "error: missing solution for day $DAY, problem $PROBLEM ($PROGRAM)" >&2
+  exit 1
+fi
+
+"$(dirname "$0")/aoc-fetch" "$DAY" | {
+  cd "$(dirname "$PROGRAM")"
+  exec "$PWD/$(basename "$PROGRAM")"
+}

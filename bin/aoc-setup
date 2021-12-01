@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+
+usage() {
+  echo "usage: $(basename "$0") <day>" >&2
+  exit 1
+}
+
+DAY="${1#0}"
+[ -n "$DAY" ] || usage
+
+SRC_DIR="$(printf "src/%02d" "$DAY")"
+
+for dir in "$SRC_DIR"/{1,2}; do
+  mkdir -p "$dir"
+  [ -r "$dir/solve" ] || printf "#!/bin/sh\nset -e\n\n" > "$dir/solve"
+  chmod +x "$dir/solve"
+done
+
+"$(dirname "$0")/aoc-fetch" "$DAY"

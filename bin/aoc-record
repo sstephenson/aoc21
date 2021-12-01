@@ -1,0 +1,24 @@
+#!/bin/sh
+set -e
+
+usage() {
+  echo "usage: $(basename "$0") <day> <problem>" >&2
+  exit 1
+}
+
+DAY="${1#0}"
+[ -n "$DAY" ] || usage
+
+PROBLEM="$2"
+[ -n "$PROBLEM" ] || usage
+
+FILE="$(printf "output/%02d/%d.txt" "$DAY" "$PROBLEM")"
+
+if [ -r "$FILE" ]; then
+  echo "error: already recorded output for day $DAY, problem $PROBLEM ($FILE)" >&2
+  exit 1
+fi
+
+mkdir -p "$(dirname "$FILE")"
+"$(dirname "$0")/aoc-solve" "$DAY" "$PROBLEM" \
+  | tee "$FILE"

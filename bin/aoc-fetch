@@ -1,0 +1,39 @@
+#!/bin/sh
+set -e
+
+aoc_date() {
+  TZ="America/New_York" date +"%Y%m%d"
+}
+
+DAY="${1#0}"
+
+if [ -z "$DAY" ]; then
+  echo "usage: $(basename "$0") <day>" >&2
+  exit 1
+fi
+
+DATE="$(printf "202112%02d" "$DAY")"
+FILE="$(printf "input/%02d.txt" "$DAY")"
+URL="https://adventofcode.com/2021/day/$DAY/input"
+
+if ! [ -r "$FILE" ]; then
+  if [ "$(aoc_date)" -lt "$DATE" ]; then
+    echo "$(basename "$0"): too early!" >&2
+    exit 1
+  fi
+
+  if ! [ -r cookie.txt ]; then
+    echo "$(basename "$0"): missing cookie.txt file" >&2
+    exit 1
+  fi
+
+  mkdir -p input
+  curl -sLSH "Cookie: $(cat cookie.txt)" "$URL" >"$FILE" || {
+    STATUS=$?
+    echo "$(basename "$0"): couldn't download $URL ($STATUS)"
+    rm -f "$FILE"
+    exit 1
+  } >&2
+fi
+
+exec cat "$FILE"

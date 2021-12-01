@@ -3,4 +3,4 @@ set -e
 
 # How many measurements are larger than the previous measurement?
 
-awk -f count_larger_than_previous.awk
+awk -f ../count_larger_than_previous.awk

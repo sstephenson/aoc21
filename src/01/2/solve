@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+# Consider sums of a three-measurement sliding window. How many sums are
+# larger than the previous sum?
+
+awk -v window_size=3 -f filter_into_sliding_windows.awk \
+  | awk -f sum_fields.awk \
+  | awk -f ../count_larger_than_previous.awk

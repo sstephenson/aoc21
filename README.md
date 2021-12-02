@@ -8,13 +8,14 @@ the [POSIX.1-2017][posix] standard.
 
 * [sh] - shell, the standard command language interpreter
 * [awk] - pattern scanning and processing language
+* [bc] - arbitrary-precision arithmetic language
 
 #### Solutions
 
 <table>
   <tr>
     <td><a href="src/01">Day 1</a></td>
-    <td>Day 2</td>
+    <td><a href="src/02">Day 2</a></td>
     <td>Day 3</td>
     <td>Day 4</td>
     <td>Day 5</td>
@@ -78,5 +79,6 @@ To test each solution against the recorded output, run `bin/aoc test`.
 
 [aoc]: https://adventofcode.com/2021
 [awk]: https://pubs.opengroup.org/onlinepubs/9699919799/utilities/awk.html
+[bc]: https://pubs.opengroup.org/onlinepubs/9699919799/
 [posix]: https://pubs.opengroup.org/onlinepubs/9699919799/
 [sh]: https://pubs.opengroup.org/onlinepubs/9699919799/utilities/sh.html

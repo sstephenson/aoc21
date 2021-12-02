@@ -1,0 +1,12 @@
+define d(n) {
+  a += n
+}
+
+define f(n) {
+  x += n
+  y += (a * n)
+}
+
+define u(n) {
+  a -= n
+}

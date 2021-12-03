@@ -7,6 +7,6 @@ set -e
 # decimal, not binary.)
 
 { echo "ibase=2"
-  sed -f split_chars.sed \
+  sed -f ../split_bits.sed \
     | awk -v OFS=" * " -f decode_rates.awk
 } | bc

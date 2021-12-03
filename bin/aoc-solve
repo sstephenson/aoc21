@@ -19,6 +19,8 @@ if ! [ -x "$PROGRAM" ]; then
   exit 1
 fi
 
+export TMPDIR="${TMPDIR:-/tmp}"
+
 "$(dirname "$0")/aoc-fetch" "$DAY" | {
   cd "$(dirname "$PROGRAM")"
   exec "$PWD/$(basename "$PROGRAM")"

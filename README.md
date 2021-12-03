@@ -9,6 +9,7 @@ the [POSIX.1-2017][posix] standard.
 * [sh] - shell, the standard command language interpreter
 * [awk] - pattern scanning and processing language
 * [bc] - arbitrary-precision arithmetic language
+* [sed] - stream editor
 
 #### Solutions
 
@@ -16,7 +17,7 @@ the [POSIX.1-2017][posix] standard.
   <tr>
     <td><a href="src/01">Day 1</a></td>
     <td><a href="src/02">Day 2</a></td>
-    <td>Day 3</td>
+    <td><a href="src/03">Day 3</a></td>
     <td>Day 4</td>
     <td>Day 5</td>
   </tr>
@@ -57,6 +58,8 @@ optionally additional source files, in a subdirectory of `src/`
 corresponding to the day and problem. The `solve` program makes the
 following assumptions about its environment:
 
+* The `TMPDIR` environment variable will be set to the path of a writable
+  temporary directory.
 * The current working directory will be set to the parent directory of the
   `solve` program.
 * The program will read the day’s input from stdin.
@@ -81,4 +84,5 @@ To test each solution against the recorded output, run `bin/aoc test`.
 [awk]: https://pubs.opengroup.org/onlinepubs/9699919799/utilities/awk.html
 [bc]: https://pubs.opengroup.org/onlinepubs/9699919799/
 [posix]: https://pubs.opengroup.org/onlinepubs/9699919799/
+[sed]: https://pubs.opengroup.org/onlinepubs/9699919799/utilities/sed.html
 [sh]: https://pubs.opengroup.org/onlinepubs/9699919799/utilities/sh.html

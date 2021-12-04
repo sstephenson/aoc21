@@ -1,0 +1,33 @@
+#!/bin/sh
+set -e
+
+# To guarantee victory against the giant squid, figure out which board will
+# win first. What will your final score be if you choose that board?
+
+DIR="${TMPDIR%/}/solve.$$"
+SIZE=5
+
+trap 'rm -fr "$DIR"' EXIT
+rm -fr "$DIR"
+mkdir "$DIR"
+
+read -r numbers
+read -r
+cat >"$DIR/boards"
+
+IFS=,
+for number in $numbers; do
+  awk -f score_boards.awk -v size="$SIZE" -v number="$number" "$DIR/boards" \
+    | tee "$DIR/boards.1" \
+    | grep -E '^[0-9]+!?$' >"$DIR/scores"
+
+  while read -r line; do
+    score="${line%!}"
+    if [ "$score" != "$line" ]; then
+      echo $((number * score))
+      exit
+    fi
+  done <"$DIR/scores"
+
+  mv "$DIR/boards.1" "$DIR/boards"
+done

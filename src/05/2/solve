@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+# Consider all of the lines. At how many points do at least two lines
+# overlap?
+
+awk -f plot_lines.awk \
+  | sort \
+  | uniq -d \
+  | wc -l

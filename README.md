@@ -19,7 +19,7 @@ the [POSIX.1-2017][posix] standard.
     <td><a href="src/02">Day 2</a></td>
     <td><a href="src/03">Day 3</a></td>
     <td><a href="src/04">Day 4</a></td>
-    <td>Day 5</td>
+    <td><a href="src/05">Day 5</a></td>
   </tr>
   <tr>
     <td>Day 6</td>

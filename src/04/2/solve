@@ -1,15 +1,15 @@
 #!/bin/sh
 set -e
 
-# To guarantee victory against the giant squid, figure out which board will
-# win first. What will your final score be if you choose that board?
+# Figure out which board will win last. Once it wins, what would its final
+# score be?
 
 DIR="${TMPDIR%/}/solve.$$"
 SIZE=5
 
 trap 'rm -fr "$DIR"' EXIT
 rm -fr "$DIR"
-mkdir "$DIR"
+mkdir -p "$DIR/bingo"
 
 read -r numbers
 read -r
@@ -21,13 +21,20 @@ for number in $numbers; do
     | tee "$DIR/boards.1" \
     | grep -E '^[0-9]+!?$' >"$DIR/scores"
 
+  index=0
   while read -r line; do
+    index=$((index+1))
     score="${line%!}"
+
     if [ "$score" != "$line" ]; then
-      echo $((number * score))
-      exit
+      file="$DIR/bingo/$index"
+      if ! [ -f "$file" ]; then
+        echo $((number * score))
+        touch "$file"
+      fi
     fi
   done <"$DIR/scores"
 
   mv "$DIR/boards.1" "$DIR/boards"
-done
+done \
+  | tail -n 1

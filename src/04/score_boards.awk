@@ -1,4 +1,4 @@
-NR % (size + 1) == 0 {
+row_number() == 1 {
   split("", cols)
   bingo = 0
   unmarked = 0
@@ -9,11 +9,11 @@ NF == size {
 
   for (i = 1; i <= size; i++) {
     value = int($i)
-    matched = value == number || $i ~ /!/
-    row += matched
-    cols[i] += matched
+    marked = (value == number) || ($i ~ /!/)
+    cols[i] += marked
+    row += marked
 
-    if (matched) {
+    if (marked) {
       $i = value "!"
     } else {
       unmarked += value
@@ -31,13 +31,16 @@ NF == 1 && $1 ~ /!/ {
   unmarked = int($1)
 }
 
-NR % (size + 1) == size {
+row_number() == size + 1 {
   for (i = 1; i <= size; i++) {
     if (cols[i] == size) {
       bingo = 1
-      break
     }
   }
 
   print unmarked (bingo ? "!" : "")
+}
+
+function row_number() {
+  return ((NR - 1) % (size + 1)) + 1
 }

@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+# How many lanternfish would there be after 256 days?
+
+sed -f ../split_fish.sed \
+  | awk -f ../translate_fish.awk -v n=256 \
+  | bc ../simulate_fish.bc

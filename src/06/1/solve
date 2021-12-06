@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+# Find a way to simulate lanternfish. How many lanternfish would there be
+# after 80 days?
+
+FILE="${TMPDIR%/}/fish.$$"
+trap 'rm -f "$FILE"{,.1}' EXIT
+
+sed -f split_fish.sed >"$FILE"
+
+day=1
+while [ $day -le 80 ]; do
+  awk -f simulate_fish.awk "$FILE" >"$FILE.1"
+  mv "$FILE.1" "$FILE"
+  day=$((day+1))
+done
+
+wc -l <"$FILE"

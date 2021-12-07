@@ -12,7 +12,7 @@ END {
   for (i = 0; i <= max; i++) {
     sum = 0
     for (j = 1; j <= size; j++) {
-      sum += abs(i - crabs[j])
+      sum += cost(i, crabs[j])
     }
     print sum
   }

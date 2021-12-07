@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+# Determine the horizontal position that the crabs can align to using the
+# least fuel possible. How much fuel must they spend to align to that
+# position?
+
+awk -v FS=, -f calculate_fuel_usage.awk \
+  | sort -n \
+  | head -n 1

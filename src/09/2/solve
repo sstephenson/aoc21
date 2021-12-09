@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+# What do you get if you multiply together the sizes of the three largest
+# basins?
+
+awk -f ../read_height_map.awk -f ../find_low_points.awk -f find_basin_sizes.awk \
+  | sort -n \
+  | tail -n 3 \
+  | { product=1
+      while read -r size; do
+        product=$((product * size))
+      done
+      echo $product
+    }

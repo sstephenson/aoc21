@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+
+# Find all of the low points on your heightmap. What is the sum of the risk
+# levels of all low points on your heightmap?
+
+awk -f read_height_map.awk -f find_low_points.awk -f sum_risk_levels.awk

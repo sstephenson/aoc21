@@ -24,7 +24,7 @@ the [POSIX.1-2017][posix] standard.
   <tr>
     <td><a href="src/06">Day 6</a></td>
     <td><a href="src/07">Day 7</a></td>
-    <td>Day 8</td>
+    <td><a href="src/08">Day 8</a></td>
     <td>Day 9</td>
     <td>Day 10</td>
   </tr>

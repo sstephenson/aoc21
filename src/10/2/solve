@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+# Find the completion string for each incomplete line, score the completion
+# strings, and sort the scores. What is the middle score?
+
+FILE="${TMPDIR%/}/scores.$$"
+trap 'rm -f "$FILE"' EXIT
+
+sed -f ../split_tokens.sed \
+  | awk -f ../parse_pairs.awk -f score_autocompletions.awk \
+  | sort -n >"$FILE"
+
+count="$(wc -l <"$FILE")"
+line=$(( (count / 2) + 1 ))
+sed -ne "${line}p" "$FILE"

@@ -4,5 +4,5 @@ set -e
 # Find the first illegal character in each corrupted line of the navigation
 # subsystem. What is the total syntax error score for those errors?
 
-sed -f split_tokens.sed \
-  | awk -f score_syntax_errors.awk
+sed -f ../split_tokens.sed \
+  | awk -f ../parse_pairs.awk -f score_syntax_errors.awk

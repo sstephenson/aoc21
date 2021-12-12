@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+
+# If you can calculate the exact moments when the octopuses will all flash
+# simultaneously, you should be able to navigate through the cavern. What
+# is the first step during which all octopuses flash?
+
+awk -f ../energy_map.awk -f ../step.awk -f find_flash_step.awk

@@ -4,4 +4,4 @@ set -e
 # Given the starting energy levels of the dumbo octopuses in your cavern,
 # simulate 100 steps. How many total flashes are there after 100 steps?
 
-awk -v steps=100 -f energy_map.awk -f step.awk
+awk -v steps=100 -f ../energy_map.awk -f ../step.awk -f count_flashes.awk

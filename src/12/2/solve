@@ -1,8 +1,7 @@
 #!/bin/sh
 set -e
 
-# How many paths through this cave system are there that visit small caves
-# at most once?
+# Given these new rules, how many paths through this cave system are there?
 
 awk -v FS=- -f ../graph.awk -f ../find_paths.awk -f rules.awk \
   | wc -l

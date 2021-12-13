@@ -3,7 +3,7 @@ NF == 2 {
 }
 
 function edge_has_node(edge, node) {
-  return (edge "-") ~ ("-" node "-")
+  return index(edge "-", "-" node "-")
 }
 
 function node_is_big(node) {

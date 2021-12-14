@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+
+awk -f ../paper.awk -f print.awk

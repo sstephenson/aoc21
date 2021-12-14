@@ -1,5 +1,4 @@
 #!/bin/sh
 set -e
 
-awk -f paper.awk \
-  | head -n 1
+awk -f ../paper.awk -f count_dots.awk

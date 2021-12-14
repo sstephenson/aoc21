@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e
+
+awk -f paper.awk \
+  | head -n 1
